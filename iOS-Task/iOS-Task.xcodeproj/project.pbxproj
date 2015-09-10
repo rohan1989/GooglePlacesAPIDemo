@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C1A2D1C1BA15C1E00E0FF85 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1A2D1B1BA15C1E00E0FF85 /* NetworkManager.m */; };
+		1C1A2D201BA16D6500E0FF85 /* PlaceParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1A2D1F1BA16D6500E0FF85 /* PlaceParser.m */; };
 		1CC545401BA04CD900463F84 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC5453F1BA04CD900463F84 /* main.m */; };
 		1CC545431BA04CD900463F84 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC545421BA04CD900463F84 /* AppDelegate.m */; };
 		1CC545461BA04CD900463F84 /* iOS_Task.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1CC545441BA04CD900463F84 /* iOS_Task.xcdatamodeld */; };
@@ -28,6 +30,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C1A2D1A1BA15C1E00E0FF85 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkManager.h; path = NetworkManager/NetworkManager.h; sourceTree = "<group>"; };
+		1C1A2D1B1BA15C1E00E0FF85 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkManager.m; path = NetworkManager/NetworkManager.m; sourceTree = "<group>"; };
+		1C1A2D1E1BA16D6500E0FF85 /* PlaceParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaceParser.h; path = Parser/PlaceParser.h; sourceTree = "<group>"; };
+		1C1A2D1F1BA16D6500E0FF85 /* PlaceParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaceParser.m; path = Parser/PlaceParser.m; sourceTree = "<group>"; };
 		1CC5453A1BA04CD900463F84 /* iOS-Task.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Task.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC5453E1BA04CD900463F84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1CC5453F1BA04CD900463F84 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -62,6 +68,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C1A2D191BA15BFE00E0FF85 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				1C1A2D1A1BA15C1E00E0FF85 /* NetworkManager.h */,
+				1C1A2D1B1BA15C1E00E0FF85 /* NetworkManager.m */,
+			);
+			name = NetworkManager;
+			sourceTree = "<group>";
+		};
+		1C1A2D1D1BA16D3A00E0FF85 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				1C1A2D1E1BA16D6500E0FF85 /* PlaceParser.h */,
+				1C1A2D1F1BA16D6500E0FF85 /* PlaceParser.m */,
+			);
+			name = Parser;
+			sourceTree = "<group>";
+		};
 		1CC545311BA04CD900463F84 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +112,8 @@
 				1CC545471BA04CD900463F84 /* ViewController.h */,
 				1CC545481BA04CD900463F84 /* ViewController.m */,
 				1CC5454A1BA04CD900463F84 /* Main.storyboard */,
+				1C1A2D191BA15BFE00E0FF85 /* NetworkManager */,
+				1C1A2D1D1BA16D3A00E0FF85 /* Parser */,
 				1CC5454D1BA04CD900463F84 /* Images.xcassets */,
 				1CC5454F1BA04CD900463F84 /* LaunchScreen.xib */,
 				1CC545441BA04CD900463F84 /* iOS_Task.xcdatamodeld */,
@@ -222,9 +248,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C1A2D201BA16D6500E0FF85 /* PlaceParser.m in Sources */,
 				1CC545431BA04CD900463F84 /* AppDelegate.m in Sources */,
 				1CC545401BA04CD900463F84 /* main.m in Sources */,
 				1CC545491BA04CD900463F84 /* ViewController.m in Sources */,
+				1C1A2D1C1BA15C1E00E0FF85 /* NetworkManager.m in Sources */,
 				1CC545461BA04CD900463F84 /* iOS_Task.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -420,6 +448,7 @@
 				1CC545621BA04CD900463F84 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1CC545631BA04CD900463F84 /* Build configuration list for PBXNativeTarget "iOS-TaskTests" */ = {
 			isa = XCConfigurationList;
@@ -428,6 +457,7 @@
 				1CC545651BA04CD900463F84 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
