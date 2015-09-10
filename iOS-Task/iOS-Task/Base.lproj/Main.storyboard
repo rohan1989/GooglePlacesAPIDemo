@@ -131,7 +131,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="l3b-Ze-u9z" kind="custom" id="iVx-EY-LbC"/>
+                                            <segue destination="l3b-Ze-u9z" kind="show" identifier="mapViewSegueIdentifier" id="rVN-ZM-9rm"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -164,7 +164,7 @@
         <!--Map view-->
         <scene sceneID="Tjy-k9-nLX">
             <objects>
-                <viewController title="Map view" id="l3b-Ze-u9z" sceneMemberID="viewController">
+                <viewController title="Map view" id="l3b-Ze-u9z" customClass="MapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QNG-ap-a6m"/>
                         <viewControllerLayoutGuide type="bottom" id="Gxg-PX-hq5"/>
@@ -172,8 +172,23 @@
                     <view key="view" contentMode="scaleToFill" id="ZCh-IS-dtO">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wRU-ob-QaK">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wRU-ob-QaK" firstAttribute="leading" secondItem="ZCh-IS-dtO" secondAttribute="leading" id="UlZ-oN-2YP"/>
+                            <constraint firstItem="wRU-ob-QaK" firstAttribute="top" secondItem="QNG-ap-a6m" secondAttribute="bottom" id="blQ-EO-xdI"/>
+                            <constraint firstItem="Gxg-PX-hq5" firstAttribute="top" secondItem="wRU-ob-QaK" secondAttribute="bottom" id="eZk-OB-miu"/>
+                            <constraint firstAttribute="trailing" secondItem="wRU-ob-QaK" secondAttribute="trailing" id="if6-Nd-z6c"/>
+                        </constraints>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="mapView" destination="wRU-ob-QaK" id="tfN-iY-63H"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uaS-dd-RxX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

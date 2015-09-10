@@ -7,6 +7,7 @@
 //
 
 #import "PlaceDetailsViewController.h"
+#import "MapViewController.h"
 
 @interface PlaceDetailsViewController()
 {
@@ -23,5 +24,18 @@
     NSLog(@"populateDetailsWithPlace: %@", _place.placeName);
     placeObject = _place;
 }
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Make sure your segue name in storyboard is the same as this line
+    if ([[segue identifier] isEqualToString:@"mapViewSegueIdentifier"])
+    {
+        MapViewController *_mapViewController = (MapViewController *)segue.destinationViewController;
+        _mapViewController.hidesBottomBarWhenPushed = YES;
+        [_mapViewController showLocationWithLatitude:placeObject.latitude WithLongitude:placeObject.longitude];
+    }
+}
+
 
 @end
