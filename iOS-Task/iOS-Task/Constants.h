@@ -27,7 +27,8 @@ typedef NS_ENUM(int, PlaceType) {
 #pragma mark --------------------------------------------------------------
 #pragma mark Google API's
 #pragma mark --------------------------------------------------------------
-#define GOOGLE_API_KEY @"AIzaSyDRA6K0XH29fLzBlrQz7TJLo8v3VfuKJfc"
+//#define GOOGLE_API_KEY @"AIzaSyDRA6K0XH29fLzBlrQz7TJLo8v3VfuKJfc"
+#define GOOGLE_API_KEY @"AIzaSyArOq-mX_nVoc71tl4GnmvMdboaEdRgpPg"
 
 #define GOOGLE_MAPS_API @"https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
 #define GOOGLE_MAPS_API_KEY_LOCATION @"location"

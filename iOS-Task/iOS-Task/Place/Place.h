@@ -19,6 +19,7 @@
 @property(nonatomic, retain)NSArray *typesArray;
 @property(nonatomic, retain)NSString *vicinity;
 @property(nonatomic, assign)float rating;
+@property(nonatomic, retain)NSString *placeImageURL;
 
 
 @end

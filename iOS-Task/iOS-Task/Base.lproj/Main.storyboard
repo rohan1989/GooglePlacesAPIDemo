@@ -93,6 +93,7 @@
                     <navigationItem key="navigationItem" title="Favourite Places List" id="hYQ-FN-P4a"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="placesTableView" destination="yGO-o5-c1z" id="EKo-xk-C5L"/>
                         <segue destination="roQ-Io-sWf" kind="custom" id="iAW-lI-iad"/>
                     </connections>
                 </viewController>

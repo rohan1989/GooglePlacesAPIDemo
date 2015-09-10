@@ -9,6 +9,13 @@
 #import "PlaceListViewController.h"
 #import "Place.h"
 
+@interface PlaceListViewController()<UITableViewDataSource, UITableViewDelegate>
+{
+    NSArray *placesArray;
+    __weak IBOutlet UITableView *placesTableView;
+}
+@end
+
 @implementation PlaceListViewController
 
 - (void)initializeView:(BOOL)_isShownForTabBar WithType:(PlaceType)_placeType WithPlaces:(NSArray *)_placesArray
@@ -40,7 +47,41 @@
                 break;
         }
         [self.navigationItem setTitle:navigationTitle];
+        
+        placesArray = [[NSArray alloc] initWithArray:_placesArray];
+        [placesTableView reloadData];
     }
+}
+
+
+#pragma mark --------------------------------------------------------------
+#pragma mark Tableview Delegates and Datasources
+#pragma mark --------------------------------------------------------------
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [placesArray count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *reuseIdentifier = @"placeListCellIdentifier";
+    UITableViewCell *_tableViewCell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    if(!_tableViewCell)
+    {
+        _tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        [_tableViewCell setBackgroundColor:[UIColor clearColor]];
+    }
+    Place *_place = [placesArray objectAtIndex:indexPath.row];
+    NSLog(@"PLACE: %@", _place.placeImageURL);
+    [_tableViewCell.textLabel setText:_place.placeName];
+    return _tableViewCell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
+    
+    
 }
 
 @end

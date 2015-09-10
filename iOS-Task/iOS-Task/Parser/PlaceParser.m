@@ -8,6 +8,7 @@
 
 #import "PlaceParser.h"
 #import "Place.h"
+#import "Constants.h"
 
 @implementation PlaceParser
 
@@ -42,6 +43,7 @@
                 _place.vicinity = [self objectForKeyOrNil:@"vicinity" WithDictionary:resultDictionary];
                 _place.rating = [[self objectForKeyOrNil:@"rating" WithDictionary:resultDictionary] floatValue];
                 
+                _place.placeImageURL = [NSString stringWithFormat:@"%@%@=400&%@=%@&%@=%@", GOOGLE_MAP_IMAGE_API, GOOGLE_MAP_IMAGE_API_KEY_MAXWIDTH, GOOGLE_MAP_IMAGE_API_KEY_PHOTO_REFERENCE, _place.reference, GOOGLE_MAP_IMAGE_API_KEY, GOOGLE_API_KEY];
                 [parsedResponseArray addObject:_place];
             }
             completion(parsedResponseArray, nil);
