@@ -32,6 +32,7 @@
 
 - (void)networkRequestWithURL:(NSString *)_urlString WithCompletion:(void (^)(NSArray *placeResponseArray, NSError *error))completion
 {
+    NSLog(@"networkRequestWithURL: %@", _urlString);
     if(!networkOperationQueue)
     {
         networkOperationQueue = [[NSOperationQueue alloc] init];

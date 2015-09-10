@@ -11,6 +11,6 @@
 
 @interface PlaceListViewController : UIViewController
 
-- (void)initializeView:(BOOL)_isShownForTabBar WithType:(PlaceType)_placeType;
+- (void)initializeView:(BOOL)_isShownForTabBar WithType:(PlaceType)_placeType WithPlaces:(NSArray *)_placesArray;
 
 @end

@@ -15,6 +15,7 @@
 {
     NSArray *placeTypeArray;
     PlaceType selectedPlaceType;
+    NSArray *searchedPlacesArray;
 }
 @end
 
@@ -67,7 +68,44 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     selectedPlaceType = (PlaceType)indexPath.row+1;
-    [self performSegueWithIdentifier:@"placesListSegueIdentifier" sender:self];
+//  https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=18.520430,73.856744&radius=5000&types=FOOD&key=AIzaSyArOq-mX_nVoc71tl4GnmvMdboaEdRgpPg
+    
+    [[NetworkManager sharedNetworkManager] networkRequestWithURL:[NSString stringWithFormat:@"%@%@=%@&%@=%@&%@=%@&%@=%@", GOOGLE_MAPS_API, GOOGLE_MAPS_API_KEY_LOCATION, @"18.520430,73.856744", GOOGLE_MAPS_API_KEY_RADIUS, @"5", GOOGLE_MAPS_API_KEY_TYPES, [self getType:(int)indexPath.row], GOOGLE_MAPS_API_KEY, @"AIzaSyArOq-mX_nVoc71tl4GnmvMdboaEdRgpPg"] WithCompletion:^(NSArray *placeResponseArray, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(!error && placeResponseArray && [placeResponseArray count])
+            {
+                searchedPlacesArray = [[NSArray alloc] initWithArray:placeResponseArray];
+                [self performSegueWithIdentifier:@"placesListSegueIdentifier" sender:self];
+            }
+        });
+    }];
+}
+
+- (NSString *)getType:(int)_index
+{
+    switch (_index) {
+        case 0:
+            return @"FOOD";
+            break;
+        case 1:
+            return @"GYM";
+            break;
+        case 2:
+            return @"SCHOOL";
+            break;
+        case 3:
+            return @"HOSPITAL";
+            break;
+        case 4:
+            return @"SPA";
+            break;
+        case 5:
+            return @"RESTAURENT";
+            break;
+        default:
+            break;
+    }
+    return @"FOOD";
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -77,7 +115,7 @@
     {
         PlaceListViewController *_placeListViewController = (PlaceListViewController *)segue.destinationViewController;
         _placeListViewController.hidesBottomBarWhenPushed = YES;
-        [_placeListViewController initializeView:FALSE WithType:selectedPlaceType];
+        [_placeListViewController initializeView:FALSE WithType:selectedPlaceType WithPlaces:searchedPlacesArray];
     }
 }
 

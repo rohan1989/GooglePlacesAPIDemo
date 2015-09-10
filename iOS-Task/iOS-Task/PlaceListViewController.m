@@ -7,10 +7,11 @@
 //
 
 #import "PlaceListViewController.h"
+#import "Place.h"
 
 @implementation PlaceListViewController
 
-- (void)initializeView:(BOOL)_isShownForTabBar WithType:(PlaceType)_placeType
+- (void)initializeView:(BOOL)_isShownForTabBar WithType:(PlaceType)_placeType WithPlaces:(NSArray *)_placesArray
 {
     if(!_isShownForTabBar)
     {

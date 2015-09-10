@@ -37,7 +37,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Places" id="aTu-lb-vJp"/>
                     <connections>
-                        <segue destination="MZQ-Jd-XJu" kind="show" identifier="placesListSegueIdentifier" id="cXQ-y0-P1o"/>
+                        <segue destination="MZQ-Jd-XJu" kind="show" identifier="placesListSegueIdentifier" id="zt0-85-K3S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -76,15 +76,18 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="yGO-o5-c1z">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="MZQ-Jd-XJu" id="kkc-du-okS"/>
+                                    <outlet property="delegate" destination="MZQ-Jd-XJu" id="0Xj-ur-pkz"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="yGO-o5-c1z" firstAttribute="leading" secondItem="fLm-yV-buT" secondAttribute="leading" id="1yG-wl-PyU"/>
-                            <constraint firstAttribute="trailing" secondItem="yGO-o5-c1z" secondAttribute="trailing" id="CWV-kZ-m3Q"/>
-                            <constraint firstAttribute="centerX" secondItem="yGO-o5-c1z" secondAttribute="centerX" id="IAi-he-soO"/>
-                            <constraint firstItem="yGO-o5-c1z" firstAttribute="top" secondItem="SFL-pH-Ba2" secondAttribute="bottom" id="ZeV-O1-U8f"/>
-                            <constraint firstItem="XfS-1y-DpC" firstAttribute="top" secondItem="yGO-o5-c1z" secondAttribute="bottom" constant="-49" id="a14-TW-DU4"/>
+                            <constraint firstAttribute="bottom" secondItem="yGO-o5-c1z" secondAttribute="bottom" id="C9o-xS-R04"/>
+                            <constraint firstItem="yGO-o5-c1z" firstAttribute="top" secondItem="SFL-pH-Ba2" secondAttribute="bottom" id="VAw-83-xeD"/>
+                            <constraint firstAttribute="trailing" secondItem="yGO-o5-c1z" secondAttribute="trailing" id="dhN-31-Puc"/>
+                            <constraint firstItem="yGO-o5-c1z" firstAttribute="leading" secondItem="fLm-yV-buT" secondAttribute="leading" id="goO-Pq-2Yh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Favourite Places List" id="hYQ-FN-P4a"/>
@@ -216,6 +219,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="cXQ-y0-P1o"/>
+        <segue reference="zt0-85-K3S"/>
     </inferredMetricsTieBreakers>
 </document>
