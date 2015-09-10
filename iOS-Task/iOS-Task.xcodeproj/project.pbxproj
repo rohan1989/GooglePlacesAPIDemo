@@ -10,6 +10,7 @@
 		1C1A2D1C1BA15C1E00E0FF85 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1A2D1B1BA15C1E00E0FF85 /* NetworkManager.m */; };
 		1C1A2D201BA16D6500E0FF85 /* PlaceParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1A2D1F1BA16D6500E0FF85 /* PlaceParser.m */; };
 		1C1A2D231BA178B000E0FF85 /* PlaceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1A2D221BA178B000E0FF85 /* PlaceListViewController.m */; };
+		1C6C664C1BA20F0E008A2730 /* PlaceDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C664B1BA20F0E008A2730 /* PlaceDetailsViewController.m */; };
 		1C8003E81BA1969600B0D8F6 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8003E71BA1969600B0D8F6 /* Place.m */; };
 		1CC545401BA04CD900463F84 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC5453F1BA04CD900463F84 /* main.m */; };
 		1CC545431BA04CD900463F84 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC545421BA04CD900463F84 /* AppDelegate.m */; };
@@ -39,6 +40,8 @@
 		1C1A2D211BA178B000E0FF85 /* PlaceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceListViewController.h; sourceTree = "<group>"; };
 		1C1A2D221BA178B000E0FF85 /* PlaceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceListViewController.m; sourceTree = "<group>"; };
 		1C1A2D241BA1807B00E0FF85 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		1C6C664A1BA20F0E008A2730 /* PlaceDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceDetailsViewController.h; sourceTree = "<group>"; };
+		1C6C664B1BA20F0E008A2730 /* PlaceDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceDetailsViewController.m; sourceTree = "<group>"; };
 		1C8003E61BA1969600B0D8F6 /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Place.h; path = Place/Place.h; sourceTree = "<group>"; };
 		1C8003E71BA1969600B0D8F6 /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Place.m; path = Place/Place.m; sourceTree = "<group>"; };
 		1CC5453A1BA04CD900463F84 /* iOS-Task.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Task.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +134,8 @@
 				1CC5454A1BA04CD900463F84 /* Main.storyboard */,
 				1C1A2D211BA178B000E0FF85 /* PlaceListViewController.h */,
 				1C1A2D221BA178B000E0FF85 /* PlaceListViewController.m */,
+				1C6C664A1BA20F0E008A2730 /* PlaceDetailsViewController.h */,
+				1C6C664B1BA20F0E008A2730 /* PlaceDetailsViewController.m */,
 				1C8003E51BA1966B00B0D8F6 /* Place */,
 				1C1A2D191BA15BFE00E0FF85 /* NetworkManager */,
 				1C1A2D1D1BA16D3A00E0FF85 /* Parser */,
@@ -272,6 +277,7 @@
 				1CC545431BA04CD900463F84 /* AppDelegate.m in Sources */,
 				1CC545401BA04CD900463F84 /* main.m in Sources */,
 				1CC545491BA04CD900463F84 /* ViewController.m in Sources */,
+				1C6C664C1BA20F0E008A2730 /* PlaceDetailsViewController.m in Sources */,
 				1C1A2D1C1BA15C1E00E0FF85 /* NetworkManager.m in Sources */,
 				1C1A2D231BA178B000E0FF85 /* PlaceListViewController.m in Sources */,
 				1CC545461BA04CD900463F84 /* iOS_Task.xcdatamodeld in Sources */,

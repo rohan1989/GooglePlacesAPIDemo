@@ -8,11 +8,13 @@
 
 #import "PlaceListViewController.h"
 #import "Place.h"
+#import "PlaceDetailsViewController.h"
 
 @interface PlaceListViewController()<UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *placesArray;
     __weak IBOutlet UITableView *placesTableView;
+    int selectedIndex;
 }
 @end
 
@@ -80,8 +82,19 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
-    
-    
+    selectedIndex = (int)indexPath.row;
+    [self performSegueWithIdentifier:@"placeDetailsSegueIdentifier" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Make sure your segue name in storyboard is the same as this line
+    if ([[segue identifier] isEqualToString:@"placeDetailsSegueIdentifier"])
+    {
+        PlaceDetailsViewController *_placeDetailsViewController = (PlaceDetailsViewController *)segue.destinationViewController;
+        _placeDetailsViewController.hidesBottomBarWhenPushed = YES;
+        [_placeDetailsViewController populateDetailsWithPlace:[placesArray objectAtIndex:selectedIndex]];
+    }
 }
 
 @end

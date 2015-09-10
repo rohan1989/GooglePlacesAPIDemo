@@ -94,7 +94,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="placesTableView" destination="yGO-o5-c1z" id="EKo-xk-C5L"/>
-                        <segue destination="roQ-Io-sWf" kind="custom" id="iAW-lI-iad"/>
+                        <segue destination="roQ-Io-sWf" kind="custom" identifier="placeDetailsSegueIdentifier" id="iAW-lI-iad"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o5g-66-zv1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -104,7 +104,7 @@
         <!--Detailed Places-->
         <scene sceneID="4xm-TG-vdm">
             <objects>
-                <viewController title="Detailed Places" id="roQ-Io-sWf" sceneMemberID="viewController">
+                <viewController title="Detailed Places" id="roQ-Io-sWf" customClass="PlaceDetailsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="64M-mK-tEj"/>
                         <viewControllerLayoutGuide type="bottom" id="zST-PH-vVb"/>
@@ -137,8 +137,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="lCZ-NL-ZXG" firstAttribute="height" secondItem="mqv-ME-6U1" secondAttribute="height" id="DKR-PT-Ldr"/>
                                     <constraint firstAttribute="height" constant="50" id="QCA-vP-9bT"/>
                                     <constraint firstAttribute="trailing" secondItem="lCZ-NL-ZXG" secondAttribute="trailing" constant="38" id="TCm-r7-0NF"/>
+                                    <constraint firstItem="lCZ-NL-ZXG" firstAttribute="width" secondItem="mqv-ME-6U1" secondAttribute="width" id="cHq-Nj-xz3"/>
                                     <constraint firstItem="lCZ-NL-ZXG" firstAttribute="leading" secondItem="mqv-ME-6U1" secondAttribute="trailing" constant="24" id="lW9-hK-r60"/>
                                     <constraint firstItem="mqv-ME-6U1" firstAttribute="leading" secondItem="EYc-KX-kC2" secondAttribute="leading" constant="38" id="u0a-d6-LuF"/>
                                     <constraint firstItem="mqv-ME-6U1" firstAttribute="top" secondItem="EYc-KX-kC2" secondAttribute="top" constant="11" id="vad-yW-Dx5"/>
