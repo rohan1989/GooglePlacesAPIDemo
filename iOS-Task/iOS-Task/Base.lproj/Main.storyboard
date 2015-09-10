@@ -16,9 +16,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="BnG-oq-p1E">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="BnG-oq-p1E">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="BmG-a5-EZe"/>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="Fp8-mD-nKr"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -32,7 +37,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Places" id="aTu-lb-vJp"/>
                     <connections>
-                        <segue destination="MZQ-Jd-XJu" kind="showDetail" id="cXQ-y0-P1o"/>
+                        <segue destination="MZQ-Jd-XJu" kind="show" identifier="placesListSegueIdentifier" id="cXQ-y0-P1o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -59,7 +64,7 @@
         <!--Places List-->
         <scene sceneID="ccc-XM-FUq">
             <objects>
-                <viewController title="Places List" id="MZQ-Jd-XJu" sceneMemberID="viewController">
+                <viewController title="Places List" id="MZQ-Jd-XJu" customClass="PlaceListViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SFL-pH-Ba2"/>
                         <viewControllerLayoutGuide type="bottom" id="XfS-1y-DpC"/>
@@ -79,10 +84,10 @@
                             <constraint firstAttribute="trailing" secondItem="yGO-o5-c1z" secondAttribute="trailing" id="CWV-kZ-m3Q"/>
                             <constraint firstAttribute="centerX" secondItem="yGO-o5-c1z" secondAttribute="centerX" id="IAi-he-soO"/>
                             <constraint firstItem="yGO-o5-c1z" firstAttribute="top" secondItem="SFL-pH-Ba2" secondAttribute="bottom" id="ZeV-O1-U8f"/>
-                            <constraint firstItem="XfS-1y-DpC" firstAttribute="top" secondItem="yGO-o5-c1z" secondAttribute="bottom" id="a14-TW-DU4"/>
+                            <constraint firstItem="XfS-1y-DpC" firstAttribute="top" secondItem="yGO-o5-c1z" secondAttribute="bottom" constant="-49" id="a14-TW-DU4"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Places List" id="hYQ-FN-P4a"/>
+                    <navigationItem key="navigationItem" title="Favourite Places List" id="hYQ-FN-P4a"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <segue destination="roQ-Io-sWf" kind="custom" id="iAW-lI-iad"/>
