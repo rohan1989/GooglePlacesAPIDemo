@@ -15,6 +15,7 @@
 {
     __weak IBOutlet MKMapView *mapView;
     CLLocationManager *locationManager;
+    CLLocation *currentLocation;
     float latitude, longitude;
 }
 
@@ -23,13 +24,33 @@
 
 @implementation MapViewController
 
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self getCurrentLocation];
+}
+
+- (void)getCurrentLocation
+{
+    locationManager = [CLLocationManager new];
+    locationManager.delegate = self;
+    [locationManager requestWhenInUseAuthorization];
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    CLAuthorizationStatus authorizationStatus= [CLLocationManager authorizationStatus];
+    
+    if (authorizationStatus == kCLAuthorizationStatusAuthorizedAlways ||
+        authorizationStatus == kCLAuthorizationStatusAuthorizedAlways ||
+        authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        
+        [locationManager startUpdatingLocation];
+        mapView.showsUserLocation = YES;
+    }
+}
+
 - (void)showLocationWithLatitude:(float)_latitude WithLongitude:(float)_longitude
 {
-    locationManager = [[CLLocationManager alloc] init];
-    [locationManager setDelegate:self];
-    [locationManager requestAlwaysAuthorization];
-    [locationManager startUpdatingLocation];
-    
     latitude = _latitude;
     longitude = _longitude;
 }
@@ -37,12 +58,22 @@
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
-    CLLocationCoordinate2D zoomLocation;
-    zoomLocation.latitude = latitude;
-    zoomLocation.longitude= longitude;
-    
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
-    [mapView setRegion:viewRegion animated:YES];
+    if (status == kCLAuthorizationStatusAuthorizedAlways ||
+        status == kCLAuthorizationStatusAuthorizedAlways ||
+        status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        CLLocationCoordinate2D zoomLocation;
+        zoomLocation.latitude = latitude;
+        zoomLocation.longitude= longitude;
+        
+        MKPointAnnotation *addAnnotation = [[MKPointAnnotation alloc] init];
+        [addAnnotation setTitle:@"Rohan"];
+        [addAnnotation setSubtitle:@"Jashn-E-Bahara"];
+        [addAnnotation setCoordinate:zoomLocation];
+        [mapView addAnnotation:addAnnotation];
+        
+        MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
+        [mapView setRegion:viewRegion animated:YES];
+    }
 }
 
 @end

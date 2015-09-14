@@ -38,8 +38,9 @@
         networkOperationQueue = [[NSOperationQueue alloc] init];
     }
     
-    [networkOperationQueue addOperationWithBlock:^{
+//    [networkOperationQueue addOperationWithBlock:^{
         NSURLSession *session = [NSURLSession sharedSession];
+    [session invalidateAndCancel];
         NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:_urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             if(error || !data)
             {
@@ -56,7 +57,7 @@
             }
         }];
         [dataTask resume];
-    }];
+//    }];
 }
 
 - (void)networkRequestDownloadImage:(NSString *)_imageURL

@@ -10,6 +10,7 @@
 #import "NetworkManager.h"
 #import "PlaceListViewController.h"
 #import "Constants.h"
+#import "AppDelegate.h"
 
 @interface ViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -68,11 +69,22 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
+
+    AppDelegate *_appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSArray *_currentLocationArray = [_appDelegate getUserLocationDetails];
+    
+    if(!_currentLocationArray || ![_currentLocationArray count])
+    {
+        return;
+    }
+    
+    NSNumber *_usersLatitude = [_currentLocationArray objectAtIndex:0];
+    NSNumber *_usersLongitude = [_currentLocationArray objectAtIndex:1];
     
     selectedPlaceType = (PlaceType)indexPath.row+1;
 //  https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=18.520430,73.856744&radius=5000&types=FOOD&key=AIzaSyArOq-mX_nVoc71tl4GnmvMdboaEdRgpPg
     
-    [[NetworkManager sharedNetworkManager] networkRequestWithURL:[NSString stringWithFormat:@"%@%@=%@&%@=%@&%@=%@&%@=%@", GOOGLE_MAPS_API, GOOGLE_MAPS_API_KEY_LOCATION, @"18.520430,73.856744", GOOGLE_MAPS_API_KEY_RADIUS, @"1", GOOGLE_MAPS_API_KEY_TYPES, [self getType:(int)indexPath.row], GOOGLE_MAPS_API_KEY, GOOGLE_API_KEY] WithCompletion:^(NSArray *placeResponseArray, NSError *error) {
+    [[NetworkManager sharedNetworkManager] networkRequestWithURL:[NSString stringWithFormat:@"%@%@=%@&%@=%@&%@=%@&%@=%@", GOOGLE_MAPS_API, GOOGLE_MAPS_API_KEY_LOCATION, [NSString stringWithFormat:@"%f,%f", [_usersLatitude floatValue], [_usersLongitude floatValue]], GOOGLE_MAPS_API_KEY_RADIUS, @"50000", GOOGLE_MAPS_API_KEY_TYPES, [self getType:(int)indexPath.row], GOOGLE_MAPS_API_KEY, GOOGLE_API_KEY] WithCompletion:^(NSArray *placeResponseArray, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if(!error && placeResponseArray && [placeResponseArray count])
             {

@@ -6,17 +6,24 @@
 //  Copyright (c) 2015 Rohan. All rights reserved.
 //
 
+#define USER_LOCATION_KEY_LATITUDE @"USER_LATITUDE"
+#define USER_LOCATION_KEY_LONGITUDE @"USER_LONGITUDE"
+
 #import "AppDelegate.h"
+#import <MapKit/MapKit.h>
 
-@interface AppDelegate ()
-
+@interface AppDelegate ()<CLLocationManagerDelegate>
+{
+    CLLocationManager *locationManager;
+    CLLocation *currentLocation;
+}
 @end
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [self getCurrentLocation];
     return YES;
 }
 
@@ -123,5 +130,54 @@
         }
     }
 }
+
+
+#pragma mark --------------------------------------------------------------
+#pragma mark Location
+#pragma mark --------------------------------------------------------------
+- (void)getCurrentLocation
+{
+    locationManager = [CLLocationManager new];
+    locationManager.delegate = self;
+    [locationManager requestWhenInUseAuthorization];
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    CLAuthorizationStatus authorizationStatus= [CLLocationManager authorizationStatus];
+    
+    if (authorizationStatus == kCLAuthorizationStatusAuthorizedAlways ||
+        authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        [locationManager startUpdatingLocation];
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    CLAuthorizationStatus authorizationStatus= [CLLocationManager authorizationStatus];
+
+    if (authorizationStatus == kCLAuthorizationStatusAuthorizedAlways ||
+        authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        currentLocation = [locations objectAtIndex:0];
+        NSLog(@"LOCATION %f %f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
+        [self saveUsersLocation];
+        [locationManager stopUpdatingLocation];
+    }
+}
+
+- (void)saveUsersLocation
+{
+    NSUserDefaults *_userDefaults = [NSUserDefaults standardUserDefaults];
+    [_userDefaults setObject:[NSNumber numberWithFloat:currentLocation.coordinate.latitude] forKey:USER_LOCATION_KEY_LATITUDE];
+    [_userDefaults setObject:[NSNumber numberWithFloat:currentLocation.coordinate.longitude] forKey:USER_LOCATION_KEY_LONGITUDE];
+    [_userDefaults synchronize];
+}
+
+- (NSArray *)getUserLocationDetails
+{
+    NSUserDefaults *_userDefaults = [NSUserDefaults standardUserDefaults];
+    return [[NSArray alloc] initWithObjects:[_userDefaults objectForKey:USER_LOCATION_KEY_LATITUDE], [_userDefaults objectForKey:USER_LOCATION_KEY_LONGITUDE], nil];
+}
+
+
 
 @end
