@@ -12,6 +12,10 @@
 @interface PlaceDetailsViewController()
 {
     Place *placeObject;
+    __weak IBOutlet UILabel *nameLabel;
+    __weak IBOutlet UILabel *typesLabel;
+    __weak IBOutlet UILabel *vicinityLabel;
+    __weak IBOutlet UILabel *ratingsLabel;
 }
 
 @end
@@ -21,8 +25,29 @@
 
 - (void)populateDetailsWithPlace:(Place *)_place
 {
-    NSLog(@"populateDetailsWithPlace: %@", _place.placeName);
-    placeObject = _place;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"populateDetailsWithPlace: %@", _place.placeName);
+        placeObject = _place;
+        
+        [nameLabel setText:placeObject.placeName];
+        
+        NSMutableString *_string = [[NSMutableString alloc] initWithString:@"Types: "];
+        if(![placeObject.typesArray count])
+        {
+            [_string appendString:@"NONE"];
+        }
+        else{
+            for (NSString *typeString in placeObject.typesArray) {
+                [_string appendString:[NSString stringWithFormat:@"%@, ", typeString]];
+            }
+        }
+        [_string deleteCharactersInRange:NSMakeRange([_string length] - 2, 1)];
+        [typesLabel setText:_string];
+        
+        
+        [vicinityLabel setText:placeObject.vicinity];
+        [ratingsLabel setText:[NSString stringWithFormat:@"RATINGS: %.2f", placeObject.rating]];
+    });
 }
 
 
