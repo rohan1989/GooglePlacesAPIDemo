@@ -52,16 +52,19 @@
         [vicinityLabel setText:placeObject.vicinity];
         [ratingsLabel setText:[NSString stringWithFormat:@"RATINGS: %.2f", placeObject.rating]];
         
-        if(placeObject.placeImageURL)
+        if([placeObject.placeImageURL length])
         {
             UIImage *_image = [[ImageCache sharedImageCache] getImageForKey:placeObject.placeImageURL];
             if(!_image)
             {
-                [[NetworkManager sharedNetworkManager] networkRequestDownloadImage:placeObject.placeImageURL WithDelegate:self];
+                [[[NetworkManager alloc] init] networkRequestDownloadImage:placeObject.placeImageURL WithDelegate:self];
             }
             else{
                 [placeImageView setImage:_image];
             }
+        }
+        else{
+            [placeImageView setImage:[UIImage imageNamed:@"not_available"]];
         }
     });
 }
@@ -88,6 +91,9 @@
         if(_image)
         {
             [placeImageView setImage:_image];
+        }
+        else{
+            [placeImageView setImage:[UIImage imageNamed:@"not_available"]];
         }
     });
 }

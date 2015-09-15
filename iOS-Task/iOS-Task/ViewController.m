@@ -92,6 +92,10 @@
                 searchedPlacesArray = [[NSArray alloc] initWithArray:placeResponseArray];
                 [self performSegueWithIdentifier:@"placesListSegueIdentifier" sender:self];
             }
+            else{
+                UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"An Error occurred while searching places." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [_alertView show];
+            }
         });
     }];
 }

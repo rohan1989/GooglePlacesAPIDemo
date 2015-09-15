@@ -10,8 +10,10 @@
 #import "PlaceObject.h"
 #import "PlaceDetailsViewController.h"
 #import "DatabaseManager.h"
+#import "ImageCache.h"
+#import "NetworkManager.h"
 
-@interface PlaceListViewController()<UITableViewDataSource, UITableViewDelegate>
+@interface PlaceListViewController()<UITableViewDataSource, UITableViewDelegate, NetworkManagerProtocol>
 {
     NSArray *placesArray;
     __weak IBOutlet UITableView *placesTableView;
@@ -108,6 +110,19 @@
     PlaceObject *_place = [placesArray objectAtIndex:indexPath.row];
     NSLog(@"PLACE: %@", _place.placeImageURL);
     [_tableViewCell.textLabel setText:_place.placeName];
+    
+    if(_place.placeImageURL)
+    {
+        UIImage *_image = [[ImageCache sharedImageCache] getImageForKey:_place.placeImageURL];
+        if(!_image)
+        {
+            [[NetworkManager sharedNetworkManager] networkRequestDownloadImage:_place.placeImageURL WithDelegate:self];
+        }
+        else{
+            [_tableViewCell.imageView setImage:_image];
+        }
+    }
+    
     return _tableViewCell;
 }
 
@@ -128,6 +143,16 @@
         [_placeDetailsViewController.view setClipsToBounds:TRUE];
         [_placeDetailsViewController populateDetailsWithPlace:[placesArray objectAtIndex:selectedIndex]];
     }
+}
+
+#pragma mark --------------------------------------------------------------
+#pragma mark Network Manager Delegate
+#pragma mark --------------------------------------------------------------
+- (void)imageDownloadComplete:(NSString *)_imageURL
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [placesTableView reloadData];
+    });
 }
 
 @end

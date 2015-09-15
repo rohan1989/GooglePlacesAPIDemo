@@ -74,16 +74,16 @@
     }
     
     NSLog(@"networkRequestDownloadImage: %@", _imageURL);
-    
-    networkManagerDelegate = _networkManagerDelegate;
-    imageURL = _imageURL;
-    
-    imageData = [[NSMutableData alloc] init];
-    
-    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:networkOperationQueue];
-    NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithURL:[NSURL URLWithString:_imageURL]];
-    [downloadTask resume];
+    [networkOperationQueue addOperationWithBlock:^{
+        networkManagerDelegate = _networkManagerDelegate;
+        imageURL = _imageURL;
+        
+        imageData = [[NSMutableData alloc] init];
+        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:networkOperationQueue];
+        NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithURL:[NSURL URLWithString:_imageURL]];
+        [downloadTask resume];
+    }];
 }
 
 
@@ -104,8 +104,8 @@
     {
         [[ImageCache sharedImageCache] storeImageWithKey:imageURL WithImage:imageData];
         imageData = nil;
+        [networkManagerDelegate imageDownloadComplete:imageURL];
     }
-    [networkManagerDelegate imageDownloadComplete:imageURL];
 }
 
 @end
