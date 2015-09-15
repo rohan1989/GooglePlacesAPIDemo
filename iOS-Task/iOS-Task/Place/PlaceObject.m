@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Rohan. All rights reserved.
 //
 
-#import "Place.h"
+#import "PlaceObject.h"
 
-@implementation Place
+@implementation PlaceObject
 
 @end

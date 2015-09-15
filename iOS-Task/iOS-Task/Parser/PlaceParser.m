@@ -7,7 +7,7 @@
 //
 
 #import "PlaceParser.h"
-#import "Place.h"
+#import "PlaceObject.h"
 #import "Constants.h"
 
 @implementation PlaceParser
@@ -22,7 +22,7 @@
         {
             NSMutableArray *parsedResponseArray = [[NSMutableArray alloc] init];
             for (NSDictionary *resultDictionary in resultsArray) {
-                Place*_place = [[Place alloc] init];
+                PlaceObject*_place = [[PlaceObject alloc] init];
                 _place.latitude = [[self objectForKeyOrNil:@"lat" WithDictionary:[[resultDictionary objectForKey:@"geometry"] objectForKey:@"location"]] floatValue];
                 _place.longitude = [[self objectForKeyOrNil:@"lng" WithDictionary:[[resultDictionary objectForKey:@"geometry"] objectForKey:@"location"]] floatValue];
                 _place.iconURL = [self objectForKeyOrNil:@"icon" WithDictionary:resultDictionary];

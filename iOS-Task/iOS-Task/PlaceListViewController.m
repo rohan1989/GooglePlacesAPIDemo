@@ -7,7 +7,7 @@
 //
 
 #import "PlaceListViewController.h"
-#import "Place.h"
+#import "PlaceObject.h"
 #import "PlaceDetailsViewController.h"
 
 @interface PlaceListViewController()<UITableViewDataSource, UITableViewDelegate>
@@ -73,7 +73,7 @@
         _tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
         [_tableViewCell setBackgroundColor:[UIColor clearColor]];
     }
-    Place *_place = [placesArray objectAtIndex:indexPath.row];
+    PlaceObject *_place = [placesArray objectAtIndex:indexPath.row];
     NSLog(@"PLACE: %@", _place.placeImageURL);
     [_tableViewCell.textLabel setText:_place.placeName];
     return _tableViewCell;

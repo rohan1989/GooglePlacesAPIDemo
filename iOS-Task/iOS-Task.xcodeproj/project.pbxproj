@@ -13,8 +13,10 @@
 		1C6C664C1BA20F0E008A2730 /* PlaceDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C664B1BA20F0E008A2730 /* PlaceDetailsViewController.m */; };
 		1C6C664E1BA2133D008A2730 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C6C664D1BA2133D008A2730 /* MapKit.framework */; };
 		1C6C66511BA213EA008A2730 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C66501BA213EA008A2730 /* MapViewController.m */; };
-		1C8003E81BA1969600B0D8F6 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8003E71BA1969600B0D8F6 /* Place.m */; };
+		1C8003E81BA1969600B0D8F6 /* PlaceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8003E71BA1969600B0D8F6 /* PlaceObject.m */; };
 		1CA82B741BA7FD3200F14FBD /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA82B731BA7FD3200F14FBD /* ImageCache.m */; };
+		1CA82B781BA8162800F14FBD /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA82B771BA8162800F14FBD /* DatabaseManager.m */; };
+		1CA82B7B1BA817EA00F14FBD /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA82B7A1BA817EA00F14FBD /* Place.m */; };
 		1CC545401BA04CD900463F84 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC5453F1BA04CD900463F84 /* main.m */; };
 		1CC545431BA04CD900463F84 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC545421BA04CD900463F84 /* AppDelegate.m */; };
 		1CC545461BA04CD900463F84 /* iOS_Task.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1CC545441BA04CD900463F84 /* iOS_Task.xcdatamodeld */; };
@@ -48,10 +50,14 @@
 		1C6C664D1BA2133D008A2730 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		1C6C664F1BA213EA008A2730 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		1C6C66501BA213EA008A2730 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
-		1C8003E61BA1969600B0D8F6 /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Place.h; path = Place/Place.h; sourceTree = "<group>"; };
-		1C8003E71BA1969600B0D8F6 /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Place.m; path = Place/Place.m; sourceTree = "<group>"; };
+		1C8003E61BA1969600B0D8F6 /* PlaceObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaceObject.h; path = Place/PlaceObject.h; sourceTree = "<group>"; };
+		1C8003E71BA1969600B0D8F6 /* PlaceObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaceObject.m; path = Place/PlaceObject.m; sourceTree = "<group>"; };
 		1CA82B721BA7FD3200F14FBD /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
 		1CA82B731BA7FD3200F14FBD /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCache.m; sourceTree = "<group>"; };
+		1CA82B761BA8162800F14FBD /* DatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatabaseManager.h; path = DatabaseManager/DatabaseManager.h; sourceTree = "<group>"; };
+		1CA82B771BA8162800F14FBD /* DatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatabaseManager.m; path = DatabaseManager/DatabaseManager.m; sourceTree = "<group>"; };
+		1CA82B791BA817EA00F14FBD /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Place.h; path = DatabaseManager/Place.h; sourceTree = "<group>"; };
+		1CA82B7A1BA817EA00F14FBD /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Place.m; path = DatabaseManager/Place.m; sourceTree = "<group>"; };
 		1CC5453A1BA04CD900463F84 /* iOS-Task.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Task.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC5453E1BA04CD900463F84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1CC5453F1BA04CD900463F84 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -108,8 +114,8 @@
 		1C8003E51BA1966B00B0D8F6 /* Place */ = {
 			isa = PBXGroup;
 			children = (
-				1C8003E61BA1969600B0D8F6 /* Place.h */,
-				1C8003E71BA1969600B0D8F6 /* Place.m */,
+				1C8003E61BA1969600B0D8F6 /* PlaceObject.h */,
+				1C8003E71BA1969600B0D8F6 /* PlaceObject.m */,
 			);
 			name = Place;
 			sourceTree = "<group>";
@@ -121,6 +127,17 @@
 				1CA82B731BA7FD3200F14FBD /* ImageCache.m */,
 			);
 			name = ImageCache;
+			sourceTree = "<group>";
+		};
+		1CA82B751BA8160900F14FBD /* DatabaseManager */ = {
+			isa = PBXGroup;
+			children = (
+				1CA82B791BA817EA00F14FBD /* Place.h */,
+				1CA82B7A1BA817EA00F14FBD /* Place.m */,
+				1CA82B761BA8162800F14FBD /* DatabaseManager.h */,
+				1CA82B771BA8162800F14FBD /* DatabaseManager.m */,
+			);
+			name = DatabaseManager;
 			sourceTree = "<group>";
 		};
 		1CC545311BA04CD900463F84 = {
@@ -157,6 +174,7 @@
 				1C6C664B1BA20F0E008A2730 /* PlaceDetailsViewController.m */,
 				1C6C664F1BA213EA008A2730 /* MapViewController.h */,
 				1C6C66501BA213EA008A2730 /* MapViewController.m */,
+				1CA82B751BA8160900F14FBD /* DatabaseManager */,
 				1CA82B711BA7FD1D00F14FBD /* ImageCache */,
 				1C8003E51BA1966B00B0D8F6 /* Place */,
 				1C1A2D191BA15BFE00E0FF85 /* NetworkManager */,
@@ -304,13 +322,15 @@
 				1CC545431BA04CD900463F84 /* AppDelegate.m in Sources */,
 				1CC545401BA04CD900463F84 /* main.m in Sources */,
 				1CC545491BA04CD900463F84 /* ViewController.m in Sources */,
+				1CA82B781BA8162800F14FBD /* DatabaseManager.m in Sources */,
 				1C6C664C1BA20F0E008A2730 /* PlaceDetailsViewController.m in Sources */,
 				1CA82B741BA7FD3200F14FBD /* ImageCache.m in Sources */,
 				1C1A2D1C1BA15C1E00E0FF85 /* NetworkManager.m in Sources */,
 				1C1A2D231BA178B000E0FF85 /* PlaceListViewController.m in Sources */,
 				1C6C66511BA213EA008A2730 /* MapViewController.m in Sources */,
 				1CC545461BA04CD900463F84 /* iOS_Task.xcdatamodeld in Sources */,
-				1C8003E81BA1969600B0D8F6 /* Place.m in Sources */,
+				1C8003E81BA1969600B0D8F6 /* PlaceObject.m in Sources */,
+				1CA82B7B1BA817EA00F14FBD /* Place.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

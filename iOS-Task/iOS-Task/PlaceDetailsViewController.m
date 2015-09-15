@@ -13,7 +13,7 @@
 
 @interface PlaceDetailsViewController()<NetworkManagerProtocol>
 {
-    Place *placeObject;
+    PlaceObject *placeObject;
     __weak IBOutlet UILabel *nameLabel;
     __weak IBOutlet UILabel *typesLabel;
     __weak IBOutlet UILabel *vicinityLabel;
@@ -26,7 +26,7 @@
 
 @implementation PlaceDetailsViewController
 
-- (void)populateDetailsWithPlace:(Place *)_place
+- (void)populateDetailsWithPlace:(PlaceObject *)_place
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSLog(@"populateDetailsWithPlace: %@", _place.placeName);

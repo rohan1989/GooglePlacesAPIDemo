@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Place.h"
+#import "PlaceObject.h"
 
 @interface PlaceDetailsViewController : UIViewController
 
-- (void)populateDetailsWithPlace:(Place *)_place;
+- (void)populateDetailsWithPlace:(PlaceObject *)_place;
 
 @end
