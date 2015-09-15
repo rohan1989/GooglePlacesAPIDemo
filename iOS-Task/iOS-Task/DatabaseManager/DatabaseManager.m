@@ -104,21 +104,42 @@
 - (void)saveFavourites:(PlaceObject *)_placeObject WithCompletion:(void (^)(BOOL success, NSError *error))completion
 {
     NSManagedObjectContext *context = [self managedObjectContext];
-    Place *_place = [NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:context];
-    _place.latitude = _placeObject.latitude;
-    _place.longitude = _placeObject.longitude;
-    _place.iconURL = _placeObject.iconURL;
-    _place.placeID = _placeObject.placeID;
-    _place.placeName = _placeObject.placeName;
-    _place.reference = _placeObject.reference;
-    _place.typesArray = [NSKeyedArchiver archivedDataWithRootObject:_placeObject.typesArray];
-    _place.vicinity = _placeObject.vicinity;
-    _place.rating = _placeObject.rating;
-    _place.placeImageURL = _placeObject.placeImageURL;
     
-    NSError *error;
-    if (![context save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    
+    request.entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:context];
+    request.predicate = [NSPredicate predicateWithFormat:@"placeID = %@", _placeObject.placeID];
+    NSError *executeFetchError = nil;
+    NSArray *results = [context executeFetchRequest:request error:&executeFetchError];
+    
+    if (executeFetchError) {
+        completion(FALSE, executeFetchError);
+        NSLog(@"executeFetchError: %@", executeFetchError);
+    } else if (!results || ![results count]) {
+        Place *_place = [NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:context];
+        _place.latitude = _placeObject.latitude;
+        _place.longitude = _placeObject.longitude;
+        _place.iconURL = _placeObject.iconURL;
+        _place.placeID = _placeObject.placeID;
+        _place.placeName = _placeObject.placeName;
+        _place.reference = _placeObject.reference;
+        _place.typesArray = [NSKeyedArchiver archivedDataWithRootObject:_placeObject.typesArray];
+        _place.vicinity = _placeObject.vicinity;
+        _place.rating = _placeObject.rating;
+        _place.placeImageURL = _placeObject.placeImageURL;
+        
+        NSError *error;
+        if (![context save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+            completion(FALSE, error);
+        }
+        else{
+            completion(TRUE, nil);
+        }
+    }
+    else if ([results count])
+    {
+        completion(TRUE, [NSError errorWithDomain:@"Saved" code:222 userInfo:@{@"Reason": @"data already exists"}]);
     }
 }
 

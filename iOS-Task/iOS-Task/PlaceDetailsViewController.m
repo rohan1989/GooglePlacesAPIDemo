@@ -93,12 +93,28 @@
 }
 
 - (IBAction)addFavouritesButtonAction:(id)sender {
-    [[DatabaseManager sharedDatabaseManager] getAllFavouritesWithCompletion:^(NSArray *_placesArray, NSError *error) {
-        
-    }];
-    
     [[DatabaseManager sharedDatabaseManager] saveFavourites:placeObject WithCompletion:^(BOOL success, NSError *error) {
-        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSString *alertMessage = @"";
+            NSString *alertTitle = @"";
+            if(success && !error)
+            {
+                alertTitle = @"Added to favourites";
+                alertMessage = @"Successfully added to favourites";
+            }
+            else if (success && error && error.code == 222)
+            {
+                alertTitle = @"Added to favourites";
+                alertMessage = @"Already added to favourites";
+            }
+            else
+            {
+                alertTitle = @"Error";
+                alertMessage = @"An error occurred while adding to favourites";
+            }
+            UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [_alertView show];
+        });
     }];
 }
 
