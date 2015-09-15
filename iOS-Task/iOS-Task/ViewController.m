@@ -75,11 +75,11 @@
     
     if(!_currentLocationArray || ![_currentLocationArray count])
     {
-        return;
+//        return;
     }
     
-    NSNumber *_usersLatitude = [_currentLocationArray objectAtIndex:0];
-    NSNumber *_usersLongitude = [_currentLocationArray objectAtIndex:1];
+    NSNumber *_usersLatitude = [NSNumber numberWithFloat:18.520430];//[_currentLocationArray objectAtIndex:0];
+    NSNumber *_usersLongitude = [NSNumber numberWithFloat:73.856744];//[_currentLocationArray objectAtIndex:1];
     
     selectedPlaceType = (PlaceType)indexPath.row+1;
 //  https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=18.520430,73.856744&radius=5000&types=FOOD&key=AIzaSyArOq-mX_nVoc71tl4GnmvMdboaEdRgpPg

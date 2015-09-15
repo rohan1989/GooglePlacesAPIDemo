@@ -8,14 +8,17 @@
 
 #import "PlaceDetailsViewController.h"
 #import "MapViewController.h"
+#import "NetworkManager.h"
+#import "ImageCache.h"
 
-@interface PlaceDetailsViewController()
+@interface PlaceDetailsViewController()<NetworkManagerProtocol>
 {
     Place *placeObject;
     __weak IBOutlet UILabel *nameLabel;
     __weak IBOutlet UILabel *typesLabel;
     __weak IBOutlet UILabel *vicinityLabel;
     __weak IBOutlet UILabel *ratingsLabel;
+    __weak IBOutlet UIImageView *placeImageView;
 }
 
 @end
@@ -47,6 +50,18 @@
         
         [vicinityLabel setText:placeObject.vicinity];
         [ratingsLabel setText:[NSString stringWithFormat:@"RATINGS: %.2f", placeObject.rating]];
+        
+        if(placeObject.placeImageURL)
+        {
+            UIImage *_image = [[ImageCache sharedImageCache] getImageForKey:placeObject.placeImageURL];
+            if(!_image)
+            {
+                [[NetworkManager sharedNetworkManager] networkRequestDownloadImage:placeObject.placeImageURL WithDelegate:self];
+            }
+            else{
+                [placeImageView setImage:_image];
+            }
+        }
     });
 }
 
@@ -62,5 +77,18 @@
     }
 }
 
+#pragma mark --------------------------------------------------------------
+#pragma mark Network Manager Delegate
+#pragma mark --------------------------------------------------------------
+- (void)imageDownloadComplete:(NSString *)_imageURL
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIImage *_image = [[ImageCache sharedImageCache] getImageForKey:_imageURL];
+        if(_image)
+        {
+            [placeImageView setImage:_image];
+        }
+    });
+}
 
 @end

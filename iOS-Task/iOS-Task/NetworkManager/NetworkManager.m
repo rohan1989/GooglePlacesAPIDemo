@@ -8,16 +8,22 @@
 
 #import "NetworkManager.h"
 #import "PlaceParser.h"
+#import "ImageCache.h"
 
 @interface NetworkManager()<NSURLSessionDelegate>
 {
     NSOperationQueue *networkOperationQueue;
+    NSMutableData *imageData;
+    NSString *imageURL;
 }
+
+@property(nonatomic, weak)id<NetworkManagerProtocol>networkManagerDelegate;
 
 @end
 
 
 @implementation NetworkManager
+@synthesize networkManagerDelegate;
 
 + (id)sharedNetworkManager
 {
@@ -40,7 +46,6 @@
     
 //    [networkOperationQueue addOperationWithBlock:^{
         NSURLSession *session = [NSURLSession sharedSession];
-    [session invalidateAndCancel];
         NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:_urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             if(error || !data)
             {
@@ -60,7 +65,7 @@
 //    }];
 }
 
-- (void)networkRequestDownloadImage:(NSString *)_imageURL
+- (void)networkRequestDownloadImage:(NSString *)_imageURL WithDelegate:(id<NetworkManagerProtocol>)_networkManagerDelegate
 {
     if(!networkOperationQueue)
     {
@@ -68,9 +73,16 @@
         [networkOperationQueue setMaxConcurrentOperationCount:1];
     }
     
+    NSLog(@"networkRequestDownloadImage: %@", _imageURL);
+    
+    networkManagerDelegate = _networkManagerDelegate;
+    imageURL = _imageURL;
+    
+    imageData = [[NSMutableData alloc] init];
+    
     NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:networkOperationQueue];
-    NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithURL:[NSURL URLWithString:@"http://cdn.tutsplus.com/mobile/uploads/2013/12/sample.jpg"]];
+    NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithURL:[NSURL URLWithString:_imageURL]];
     [downloadTask resume];
 }
 
@@ -81,9 +93,19 @@
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location
 {
     NSData *data = [NSData dataWithContentsOfURL:location];
-    NSLog(@"data: %@", data);
-    dispatch_async(dispatch_get_main_queue(), ^{
-    });
+    [imageData appendData:data];
+//    NSLog(@"data: %@", data);
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
+{
+    NSLog(@"didCompleteWithError: %@", error);
+    if(networkManagerDelegate && [networkManagerDelegate respondsToSelector:@selector(imageDownloadComplete:)] && !error)
+    {
+        [[ImageCache sharedImageCache] storeImageWithKey:imageURL WithImage:imageData];
+        imageData = nil;
+    }
+    [networkManagerDelegate imageDownloadComplete:imageURL];
 }
 
 @end

@@ -28,7 +28,12 @@
                 _place.iconURL = [self objectForKeyOrNil:@"icon" WithDictionary:resultDictionary];
                 _place.placeID = [self objectForKeyOrNil:@"place_id" WithDictionary:resultDictionary];
                 _place.placeName = [self objectForKeyOrNil:@"name" WithDictionary:resultDictionary];
-                _place.reference = [self objectForKeyOrNil:@"reference" WithDictionary:resultDictionary];
+                NSArray *_photosArray = [self objectForKeyOrNil:@"photos" WithDictionary:resultDictionary];
+                if(_photosArray && [_photosArray isKindOfClass:[NSArray class]] && [_photosArray count])
+                {
+                    NSDictionary *_photoDictionary = [_photosArray objectAtIndex:0];
+                    _place.reference = [self objectForKeyOrNil:@"photo_reference" WithDictionary:_photoDictionary];
+                }
                 
                 NSArray *_typesArray = [self objectForKeyOrNil:@"types" WithDictionary:resultDictionary];
                 if(_typesArray && [_typesArray count])
@@ -43,7 +48,10 @@
                 _place.vicinity = [self objectForKeyOrNil:@"vicinity" WithDictionary:resultDictionary];
                 _place.rating = [[self objectForKeyOrNil:@"rating" WithDictionary:resultDictionary] floatValue];
                 
-                _place.placeImageURL = [NSString stringWithFormat:@"%@%@=400&%@=%@&%@=%@", GOOGLE_MAP_IMAGE_API, GOOGLE_MAP_IMAGE_API_KEY_MAXWIDTH, GOOGLE_MAP_IMAGE_API_KEY_PHOTO_REFERENCE, _place.reference, GOOGLE_MAP_IMAGE_API_KEY, GOOGLE_API_KEY];
+                if(_place.reference)
+                {
+                    _place.placeImageURL = [NSString stringWithFormat:@"%@%@=400&%@=%@&%@=%@", GOOGLE_MAP_IMAGE_API, GOOGLE_MAP_IMAGE_API_KEY_MAXWIDTH, GOOGLE_MAP_IMAGE_API_KEY_PHOTO_REFERENCE, _place.reference, GOOGLE_MAP_IMAGE_API_KEY, GOOGLE_API_KEY];
+                }
                 [parsedResponseArray addObject:_place];
             }
             completion(parsedResponseArray, nil);

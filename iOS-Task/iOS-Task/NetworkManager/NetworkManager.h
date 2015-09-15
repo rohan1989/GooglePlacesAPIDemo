@@ -8,10 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol NetworkManagerProtocol <NSObject>
+
+- (void)imageDownloadComplete:(NSString *)_imageURL;
+
+@end
+
 @interface NetworkManager : NSObject
 
 + (id)sharedNetworkManager;
 - (void)networkRequestWithURL:(NSString *)_urlString WithCompletion:(void (^)(NSArray *placeResponseArray, NSError *error))completion;
-- (void)networkRequestDownloadImage:(NSString *)_imageURL;
+- (void)networkRequestDownloadImage:(NSString *)_imageURL WithDelegate:(id<NetworkManagerProtocol>)_networkManagerDelegate;
 
 @end
