@@ -9,20 +9,53 @@
 #import "PlaceListViewController.h"
 #import "PlaceObject.h"
 #import "PlaceDetailsViewController.h"
+#import "DatabaseManager.h"
 
 @interface PlaceListViewController()<UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *placesArray;
     __weak IBOutlet UITableView *placesTableView;
     int selectedIndex;
+    BOOL isShownForTabBar;
 }
 @end
 
 @implementation PlaceListViewController
 
-- (void)initializeView:(BOOL)_isShownForTabBar WithType:(PlaceType)_placeType WithPlaces:(NSArray *)_placesArray
+-(void)viewDidLoad
 {
-    if(!_isShownForTabBar)
+    [super viewDidLoad];
+    if([self.navigationController.viewControllers count]>1)
+    {
+        isShownForTabBar = FALSE;
+    }
+    else
+    {
+        isShownForTabBar = TRUE;
+    }
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if(isShownForTabBar)
+    {
+        [[DatabaseManager sharedDatabaseManager] getAllFavouritesWithCompletion:^(NSArray *_placesArray, NSError *error) {
+            if(_placesArray && [_placesArray count] && !error)
+            {
+                placesArray = nil;
+                placesArray = [[NSArray alloc] initWithArray:_placesArray];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [placesTableView reloadData];
+                });
+            }
+        }];
+    }
+}
+
+- (void)initializeViewWithType:(PlaceType)_placeType WithPlaces:(NSArray *)_placesArray
+{
+    if(!isShownForTabBar)
     {
         NSString *navigationTitle = @"Places List";
         switch (_placeType) {
@@ -51,7 +84,6 @@
         [self.navigationItem setTitle:navigationTitle];
         
         placesArray = [[NSArray alloc] initWithArray:_placesArray];
-        [placesTableView reloadData];
     }
 }
 
@@ -93,6 +125,7 @@
     {
         PlaceDetailsViewController *_placeDetailsViewController = (PlaceDetailsViewController *)segue.destinationViewController;
         _placeDetailsViewController.hidesBottomBarWhenPushed = YES;
+        [_placeDetailsViewController.view setClipsToBounds:TRUE];
         [_placeDetailsViewController populateDetailsWithPlace:[placesArray objectAtIndex:selectedIndex]];
     }
 }

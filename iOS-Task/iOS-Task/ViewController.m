@@ -130,7 +130,7 @@
     {
         PlaceListViewController *_placeListViewController = (PlaceListViewController *)segue.destinationViewController;
         _placeListViewController.hidesBottomBarWhenPushed = YES;
-        [_placeListViewController initializeView:FALSE WithType:selectedPlaceType WithPlaces:searchedPlacesArray];
+        [_placeListViewController initializeViewWithType:selectedPlaceType WithPlaces:searchedPlacesArray];
     }
 }
 
