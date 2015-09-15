@@ -103,13 +103,55 @@
 
 - (void)saveFavourites:(PlaceObject *)_placeObject WithCompletion:(void (^)(BOOL success, NSError *error))completion
 {
+    NSManagedObjectContext *context = [self managedObjectContext];
+    Place *_place = [NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:context];
+    _place.latitude = _placeObject.latitude;
+    _place.longitude = _placeObject.longitude;
+    _place.iconURL = _placeObject.iconURL;
+    _place.placeID = _placeObject.placeID;
+    _place.placeName = _placeObject.placeName;
+    _place.reference = _placeObject.reference;
+    _place.typesArray = [NSKeyedArchiver archivedDataWithRootObject:_placeObject.typesArray];
+    _place.vicinity = _placeObject.vicinity;
+    _place.rating = _placeObject.rating;
+    _place.placeImageURL = _placeObject.placeImageURL;
     
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
 }
 
 
 - (void)getAllFavouritesWithCompletion:(void (^)(NSArray *_placesArray, NSError *error))completion
 {
+    NSError *error;
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
     
+    NSMutableArray *_placesArray = [[NSMutableArray alloc] init];
+    for (Place *_placeObject in fetchedObjects) {
+
+        PlaceObject *_place = [[PlaceObject alloc] init];
+        _place.latitude = _placeObject.latitude;
+        _place.longitude = _placeObject.longitude;
+        _place.iconURL = _placeObject.iconURL;
+        _place.placeID = _placeObject.placeID;
+        _place.placeName = _placeObject.placeName;
+        _place.reference = _placeObject.reference;
+        _place.typesArray = (NSArray *)[NSKeyedUnarchiver unarchiveObjectWithData:_placeObject.typesArray];
+        _place.vicinity = _placeObject.vicinity;
+        _place.rating = _placeObject.rating;
+        _place.placeImageURL = _placeObject.placeImageURL;
+
+        NSLog(@"NAME: %@", _place.placeName);
+        [_placesArray addObject:_place];
+    }
+    
+    completion([_placesArray count]?_placesArray:nil, [_placesArray count]?nil:[NSError errorWithDomain:@"Favourites" code:111 userInfo:@{@"Reason":@"Favourites list empty"}]);
 }
 
 @end

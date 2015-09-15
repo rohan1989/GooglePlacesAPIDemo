@@ -10,6 +10,7 @@
 #import "MapViewController.h"
 #import "NetworkManager.h"
 #import "ImageCache.h"
+#import "DatabaseManager.h"
 
 @interface PlaceDetailsViewController()<NetworkManagerProtocol>
 {
@@ -90,5 +91,17 @@
         }
     });
 }
+
+- (IBAction)addFavouritesButtonAction:(id)sender {
+    [[DatabaseManager sharedDatabaseManager] getAllFavouritesWithCompletion:^(NSArray *_placesArray, NSError *error) {
+        
+    }];
+    
+    [[DatabaseManager sharedDatabaseManager] saveFavourites:placeObject WithCompletion:^(BOOL success, NSError *error) {
+        
+    }];
+}
+
+
 
 @end

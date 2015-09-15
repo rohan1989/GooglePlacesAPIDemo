@@ -124,6 +124,9 @@
                                         <state key="normal" title="Add to Favourites">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="addFavouritesButtonAction:" destination="roQ-Io-sWf" eventType="touchUpInside" id="Yxq-lL-JSh"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lCZ-NL-ZXG">
                                         <rect key="frame" x="312" y="10" width="250" height="30"/>
