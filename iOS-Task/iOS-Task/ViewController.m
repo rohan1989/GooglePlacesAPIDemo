@@ -12,11 +12,12 @@
 #import "Constants.h"
 #import "AppDelegate.h"
 
-@interface ViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface ViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
     NSArray *placeTypeArray;
     PlaceType selectedPlaceType;
     NSArray *searchedPlacesArray;
+    __weak IBOutlet UITextField *enterRadiusTextfield;
 }
 @end
 
@@ -61,6 +62,8 @@
     {
         _tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
         [_tableViewCell setBackgroundColor:[UIColor clearColor]];
+        [_tableViewCell.textLabel setTextColor:[UIColor whiteColor]];
+        [_tableViewCell.textLabel setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:20.0f]];
     }
     [_tableViewCell.textLabel setText:[placeTypeArray objectAtIndex:indexPath.row]];
     return _tableViewCell;
@@ -70,12 +73,23 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
 
+    [enterRadiusTextfield resignFirstResponder];
+    if(![enterRadiusTextfield.text length])
+    {
+        UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:@"Enter Radius" message:@"Please specify the radius." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_alertView show];
+ 
+        return;
+    }
+    
     AppDelegate *_appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSArray *_currentLocationArray = [_appDelegate getUserLocationDetails];
     
     if(!_currentLocationArray || ![_currentLocationArray count])
     {
-//        return;
+        UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:@"Location Not found" message:@"Please make sure you have enabled location services for this app." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_alertView show];
+        return;
     }
     
     NSNumber *_usersLatitude = [NSNumber numberWithFloat:18.520430];//[_currentLocationArray objectAtIndex:0];
@@ -136,6 +150,12 @@
         _placeListViewController.hidesBottomBarWhenPushed = YES;
         [_placeListViewController initializeViewWithType:selectedPlaceType WithPlaces:searchedPlacesArray];
     }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return TRUE;
 }
 
 
