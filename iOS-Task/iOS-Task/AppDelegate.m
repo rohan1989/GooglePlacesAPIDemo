@@ -62,9 +62,8 @@
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     
     CLAuthorizationStatus authorizationStatus= [CLLocationManager authorizationStatus];
-    
-    if (authorizationStatus == kCLAuthorizationStatusAuthorizedAlways ||
-        authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse) {
+    if ([CLLocationManager locationServicesEnabled] && ((authorizationStatus == kCLAuthorizationStatusAuthorizedAlways) ||
+        (authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse))) {
         [locationManager startUpdatingLocation];
     }
 }

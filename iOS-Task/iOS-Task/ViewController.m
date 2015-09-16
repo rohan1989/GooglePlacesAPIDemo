@@ -87,18 +87,19 @@
     
     if(!_currentLocationArray || ![_currentLocationArray count])
     {
+        [_appDelegate getCurrentLocation];
         UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:@"Location Not found" message:@"Please make sure you have enabled location services for this app." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [_alertView show];
         return;
     }
     
-    NSNumber *_usersLatitude = [NSNumber numberWithFloat:18.520430];//[_currentLocationArray objectAtIndex:0];
-    NSNumber *_usersLongitude = [NSNumber numberWithFloat:73.856744];//[_currentLocationArray objectAtIndex:1];
+    NSNumber *_usersLatitude = [_currentLocationArray objectAtIndex:0];
+    NSNumber *_usersLongitude = [_currentLocationArray objectAtIndex:1];
     
     selectedPlaceType = (PlaceType)indexPath.row+1;
 //  https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=18.520430,73.856744&radius=5000&types=FOOD&key=AIzaSyArOq-mX_nVoc71tl4GnmvMdboaEdRgpPg
     
-    [[NetworkManager sharedNetworkManager] networkRequestWithURL:[NSString stringWithFormat:@"%@%@=%@&%@=%@&%@=%@&%@=%@", GOOGLE_MAPS_API, GOOGLE_MAPS_API_KEY_LOCATION, [NSString stringWithFormat:@"%f,%f", [_usersLatitude floatValue], [_usersLongitude floatValue]], GOOGLE_MAPS_API_KEY_RADIUS, @"50000", GOOGLE_MAPS_API_KEY_TYPES, [self getType:(int)indexPath.row], GOOGLE_MAPS_API_KEY, GOOGLE_API_KEY] WithCompletion:^(NSArray *placeResponseArray, NSError *error) {
+    [[NetworkManager sharedNetworkManager] networkRequestWithURL:[NSString stringWithFormat:@"%@%@=%@&%@=%@&%@=%@&%@=%@", GOOGLE_MAPS_API, GOOGLE_MAPS_API_KEY_LOCATION, [NSString stringWithFormat:@"%f,%f", [_usersLatitude floatValue], [_usersLongitude floatValue]], GOOGLE_MAPS_API_KEY_RADIUS, enterRadiusTextfield.text, GOOGLE_MAPS_API_KEY_TYPES, [self getType:(int)indexPath.row], GOOGLE_MAPS_API_KEY, GOOGLE_API_KEY] WithCompletion:^(NSArray *placeResponseArray, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if(!error && placeResponseArray && [placeResponseArray count])
             {

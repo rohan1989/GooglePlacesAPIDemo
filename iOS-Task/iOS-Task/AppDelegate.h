@@ -13,6 +13,7 @@
 @property (strong, nonatomic) UIWindow *window;
 
 - (NSArray *)getUserLocationDetails;
+- (void)getCurrentLocation;
 
 @end
 

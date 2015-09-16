@@ -106,6 +106,8 @@
     {
         _tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
         [_tableViewCell setBackgroundColor:[UIColor clearColor]];
+        [_tableViewCell.textLabel setTextColor:[UIColor whiteColor]];
+        [_tableViewCell.textLabel setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:10.0f]];
     }
     PlaceObject *_place = [placesArray objectAtIndex:indexPath.row];
     NSLog(@"PLACE: %@", _place.placeImageURL);
