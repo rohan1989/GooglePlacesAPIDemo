@@ -18,6 +18,8 @@
     PlaceType selectedPlaceType;
     NSArray *searchedPlacesArray;
     __weak IBOutlet UITextField *enterRadiusTextfield;
+    UIActivityIndicatorView *activityIndicator;
+    __weak IBOutlet UITableView *placesTableView;
 }
 @end
 
@@ -26,6 +28,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     placeTypeArray = [[NSArray alloc] initWithObjects:@"Food",@"Gym",@"School",@"Hospital",@"Spa",@"Restaurent", nil];
+    
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [activityIndicator setCenter:self.view.center];
+    [self.view addSubview:activityIndicator];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,6 +50,18 @@
 {
 //    [self setHidesBottomBarWhenPushed:FALSE];
     [super viewWillDisappear:animated];
+}
+
+- (void)showActivityIndicator
+{
+    [activityIndicator startAnimating];
+    [placesTableView setUserInteractionEnabled:FALSE];
+}
+
+- (void)removeActivityIndicator
+{
+    [activityIndicator stopAnimating];
+    [placesTableView setUserInteractionEnabled:TRUE];
 }
 
 #pragma mark --------------------------------------------------------------
@@ -78,7 +96,6 @@
     {
         UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:@"Enter Radius" message:@"Please specify the radius." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [_alertView show];
- 
         return;
     }
     
@@ -93,14 +110,19 @@
         return;
     }
     
-    NSNumber *_usersLatitude = [_currentLocationArray objectAtIndex:0];
-    NSNumber *_usersLongitude = [_currentLocationArray objectAtIndex:1];
+    NSNumber *_usersLatitude = [NSNumber numberWithFloat:2133.2];//[_currentLocationArray objectAtIndex:0];
+    NSNumber *_usersLongitude = [NSNumber numberWithFloat:23.2];//[_currentLocationArray objectAtIndex:1];
     
     selectedPlaceType = (PlaceType)indexPath.row+1;
 //  https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=18.520430,73.856744&radius=5000&types=FOOD&key=AIzaSyArOq-mX_nVoc71tl4GnmvMdboaEdRgpPg
     
+    [self showActivityIndicator];
+    
     [[NetworkManager sharedNetworkManager] networkRequestWithURL:[NSString stringWithFormat:@"%@%@=%@&%@=%@&%@=%@&%@=%@", GOOGLE_MAPS_API, GOOGLE_MAPS_API_KEY_LOCATION, [NSString stringWithFormat:@"%f,%f", [_usersLatitude floatValue], [_usersLongitude floatValue]], GOOGLE_MAPS_API_KEY_RADIUS, enterRadiusTextfield.text, GOOGLE_MAPS_API_KEY_TYPES, [self getType:(int)indexPath.row], GOOGLE_MAPS_API_KEY, GOOGLE_API_KEY] WithCompletion:^(NSArray *placeResponseArray, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self removeActivityIndicator];
+            
             if(!error && placeResponseArray && [placeResponseArray count])
             {
                 searchedPlacesArray = nil;

@@ -92,6 +92,7 @@
                     <navigationItem key="navigationItem" title="Places" id="aTu-lb-vJp"/>
                     <connections>
                         <outlet property="enterRadiusTextfield" destination="orx-Cn-cLZ" id="yp3-oF-cFk"/>
+                        <outlet property="placesTableView" destination="BnG-oq-p1E" id="0jj-IL-98H"/>
                         <segue destination="MZQ-Jd-XJu" kind="show" identifier="placesListSegueIdentifier" id="zt0-85-K3S"/>
                     </connections>
                 </viewController>
