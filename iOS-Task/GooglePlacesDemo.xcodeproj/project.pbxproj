@@ -68,7 +68,7 @@
 		1CA82B801BA8ADBE00F14FBD /* 1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpeg; sourceTree = "<group>"; };
 		1CA82B811BA8ADBE00F14FBD /* 2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpeg; sourceTree = "<group>"; };
 		1CA82B831BA8ADBE00F14FBD /* 4.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpeg; sourceTree = "<group>"; };
-		1CC5453A1BA04CD900463F84 /* iOS-Task.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Task.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CC5453A1BA04CD900463F84 /* GooglePlacesDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GooglePlacesDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC5453E1BA04CD900463F84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1CC5453F1BA04CD900463F84 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1CC545411BA04CD900463F84 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -79,7 +79,7 @@
 		1CC5454B1BA04CD900463F84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1CC5454D1BA04CD900463F84 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1CC545501BA04CD900463F84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		1CC545561BA04CD900463F84 /* iOS-TaskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-TaskTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CC545561BA04CD900463F84 /* GooglePlacesDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GooglePlacesDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC5455B1BA04CD900463F84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1CC5455C1BA04CD900463F84 /* iOS_TaskTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOS_TaskTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -163,8 +163,8 @@
 		1CC5453B1BA04CD900463F84 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1CC5453A1BA04CD900463F84 /* iOS-Task.app */,
-				1CC545561BA04CD900463F84 /* iOS-TaskTests.xctest */,
+				1CC5453A1BA04CD900463F84 /* GooglePlacesDemo.app */,
+				1CC545561BA04CD900463F84 /* GooglePlacesDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -231,9 +231,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1CC545391BA04CD900463F84 /* iOS-Task */ = {
+		1CC545391BA04CD900463F84 /* GooglePlacesDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1CC545601BA04CD900463F84 /* Build configuration list for PBXNativeTarget "iOS-Task" */;
+			buildConfigurationList = 1CC545601BA04CD900463F84 /* Build configuration list for PBXNativeTarget "GooglePlacesDemo" */;
 			buildPhases = (
 				1CC545361BA04CD900463F84 /* Sources */,
 				1CC545371BA04CD900463F84 /* Frameworks */,
@@ -243,14 +243,14 @@
 			);
 			dependencies = (
 			);
-			name = "iOS-Task";
+			name = GooglePlacesDemo;
 			productName = "iOS-Task";
-			productReference = 1CC5453A1BA04CD900463F84 /* iOS-Task.app */;
+			productReference = 1CC5453A1BA04CD900463F84 /* GooglePlacesDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1CC545551BA04CD900463F84 /* iOS-TaskTests */ = {
+		1CC545551BA04CD900463F84 /* GooglePlacesDemoTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1CC545631BA04CD900463F84 /* Build configuration list for PBXNativeTarget "iOS-TaskTests" */;
+			buildConfigurationList = 1CC545631BA04CD900463F84 /* Build configuration list for PBXNativeTarget "GooglePlacesDemoTests" */;
 			buildPhases = (
 				1CC545521BA04CD900463F84 /* Sources */,
 				1CC545531BA04CD900463F84 /* Frameworks */,
@@ -261,9 +261,9 @@
 			dependencies = (
 				1CC545581BA04CD900463F84 /* PBXTargetDependency */,
 			);
-			name = "iOS-TaskTests";
+			name = GooglePlacesDemoTests;
 			productName = "iOS-TaskTests";
-			productReference = 1CC545561BA04CD900463F84 /* iOS-TaskTests.xctest */;
+			productReference = 1CC545561BA04CD900463F84 /* GooglePlacesDemoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -289,7 +289,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1CC545351BA04CD900463F84 /* Build configuration list for PBXProject "iOS-Task" */;
+			buildConfigurationList = 1CC545351BA04CD900463F84 /* Build configuration list for PBXProject "GooglePlacesDemo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -302,8 +302,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1CC545391BA04CD900463F84 /* iOS-Task */,
-				1CC545551BA04CD900463F84 /* iOS-TaskTests */,
+				1CC545391BA04CD900463F84 /* GooglePlacesDemo */,
+				1CC545551BA04CD900463F84 /* GooglePlacesDemoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -367,7 +367,7 @@
 /* Begin PBXTargetDependency section */
 		1CC545581BA04CD900463F84 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1CC545391BA04CD900463F84 /* iOS-Task */;
+			target = 1CC545391BA04CD900463F84 /* GooglePlacesDemo */;
 			targetProxy = 1CC545571BA04CD900463F84 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -478,7 +478,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "iOS-Task/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GooglePlacesDemo;
 			};
 			name = Debug;
 		};
@@ -488,7 +488,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "iOS-Task/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GooglePlacesDemo;
 			};
 			name = Release;
 		};
@@ -506,7 +506,7 @@
 				);
 				INFOPLIST_FILE = "iOS-TaskTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GooglePlacesDemoTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOS-Task.app/iOS-Task";
 			};
 			name = Debug;
@@ -521,7 +521,7 @@
 				);
 				INFOPLIST_FILE = "iOS-TaskTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GooglePlacesDemoTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOS-Task.app/iOS-Task";
 			};
 			name = Release;
@@ -529,7 +529,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1CC545351BA04CD900463F84 /* Build configuration list for PBXProject "iOS-Task" */ = {
+		1CC545351BA04CD900463F84 /* Build configuration list for PBXProject "GooglePlacesDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1CC5455E1BA04CD900463F84 /* Debug */,
@@ -538,7 +538,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1CC545601BA04CD900463F84 /* Build configuration list for PBXNativeTarget "iOS-Task" */ = {
+		1CC545601BA04CD900463F84 /* Build configuration list for PBXNativeTarget "GooglePlacesDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1CC545611BA04CD900463F84 /* Debug */,
@@ -547,7 +547,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1CC545631BA04CD900463F84 /* Build configuration list for PBXNativeTarget "iOS-TaskTests" */ = {
+		1CC545631BA04CD900463F84 /* Build configuration list for PBXNativeTarget "GooglePlacesDemoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1CC545641BA04CD900463F84 /* Debug */,
