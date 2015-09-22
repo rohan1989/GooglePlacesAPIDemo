@@ -66,8 +66,8 @@
         zoomLocation.longitude= longitude;
         
         MKPointAnnotation *addAnnotation = [[MKPointAnnotation alloc] init];
-        [addAnnotation setTitle:@"Rohan"];
-        [addAnnotation setSubtitle:@"Jashn-E-Bahara"];
+        [addAnnotation setTitle:@"Test Annotation"];
+        [addAnnotation setSubtitle:@"Test Annotation subtitle"];
         [addAnnotation setCoordinate:zoomLocation];
         [mapView addAnnotation:addAnnotation];
         
