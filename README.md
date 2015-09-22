@@ -1,2 +1,2 @@
-# iOS-Task
-Demonstrate Google Places API.
+# Google Places API
+Demonstrates Google Places API.
